@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,19 +53,23 @@ public class NetFreeMXGen {
             switch (serverType) {
                 case GenConstants.type_ssh:
                     loadSSH(server);
+                    Log.i(getClass().getName(), "SSH");
                     break;
                 case GenConstants.type_slowdns:
                     loadSlowDNS(server);
+                    Log.i(getClass().getName(), "SLOWDNS");
                     break;
                 case GenConstants.type_udp:
                     loadUDP(server);
+                    Log.i(getClass().getName(), "UDP");
                     break;
                 case GenConstants.type_v2ray:
                     loadV2ray(server);
+                    Log.i(getClass().getName(), "V2RAY");
                     break;
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
+            Log.e(getClass().getName(), e.getMessage());
         }
     }
 
@@ -117,6 +122,7 @@ public class NetFreeMXGen {
                 edit.putString(GenConstants.PROXY_PORTA_KEY, proxy_port);
                 edit.putString(GenConstants.CUSTOM_PAYLOAD_KEY, payload);
 
+                Log.i(getClass().getName(), "TUNNEL DIRECT");
 
                 break;
             case GenConstants.tunnel_proxy:
@@ -129,6 +135,7 @@ public class NetFreeMXGen {
                 edit.putString(GenConstants.PROXY_IP_KEY, remote_proxy);
                 edit.putString(GenConstants.PROXY_PORTA_KEY, proxy_port);
                 edit.putString(GenConstants.CUSTOM_PAYLOAD_KEY, payload);
+                Log.i(getClass().getName(), "TUNNEL PROXY");
                 break;
             case GenConstants.tunnel_ssl:
                 edit.putBoolean(GenConstants.PROXY_USAR_DEFAULT_PAYLOAD, true);
@@ -142,7 +149,7 @@ public class NetFreeMXGen {
 
                 edit.putString(GenConstants.CUSTOM_PAYLOAD_KEY, payload);
                 edit.putString(GenConstants.CUSTOM_SNI, sni);
-
+                Log.i(getClass().getName(), "TUNNEL SSL");
                 break;
             case GenConstants.tunnel_sslpay:
                 edit.putBoolean(GenConstants.PROXY_USAR_DEFAULT_PAYLOAD, false);
@@ -153,6 +160,7 @@ public class NetFreeMXGen {
 
                 edit.putString(GenConstants.CUSTOM_PAYLOAD_KEY, payload);
                 edit.putString(GenConstants.CUSTOM_SNI, sni);
+                Log.i(getClass().getName(), "TUNNEL SSLPAY");
                 break;
         }
         edit.apply();
