@@ -19,7 +19,7 @@ public class NetFreeMXGen {
     private SharedPreferences prefs;
     private SharedPreferences.Editor edit;
     private boolean isUserToken = false;
-    private String defaultTokenPassword = getTokenId();
+    private String defaultTokenPassword = "";
     private Context context;
 
     public static NetFreeMXGen getInstance() {
@@ -36,6 +36,7 @@ public class NetFreeMXGen {
         this.prefs = prefs;
         edit = prefs.edit();
         isUserToken = isUserTokenApp;
+        defaultTokenPassword = getTokenId();
     }
 
     public void setTokenPassword(String tokenPassword) {
