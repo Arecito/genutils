@@ -90,7 +90,7 @@ public class NetFreeMXGen {
         String ssl_port = server.getString("SSLPort");
         String payload = server.getString("Payload");
         String sni = server.getString("SNI");
-        String tunnelType = server.getString("tunnelType");
+        String tunnelType = server.getString("isSSL");
 
         if (isUserToken) {
             if (isUserMode()) {
